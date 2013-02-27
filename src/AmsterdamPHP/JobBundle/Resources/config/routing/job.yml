@@ -1,0 +1,42 @@
+#job:
+#    pattern:  /
+#    defaults: { _controller: "AmsterdamPHPJobBundle:Job:index" }
+
+job:
+    pattern:  /list/{offset}/{itemCount}
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:index", offset:0, itemCount:10 }
+    requirements:
+        offset: \d+
+        itemCount: \d+
+        _method: Get
+
+own_jobs:
+    pattern: /user
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:own" }
+
+job_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:show" }
+
+job_new:
+    pattern:  /new
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:new" }
+
+job_create:
+    pattern:  /create
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:create" }
+    requirements: { _method: post }
+
+job_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:edit" }
+
+job_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:update" }
+    requirements: { _method: post|put }
+
+job_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:delete" }
+    requirements: { _method: post|delete }

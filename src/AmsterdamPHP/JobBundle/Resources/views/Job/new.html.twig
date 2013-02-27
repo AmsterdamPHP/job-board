@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+
+    <section class="span8 pull-left">
+        <h2>Job details</h2>
+        <form action="{{ path('job_create') }}" method="post" {{ form_enctype(form) }} class="new-job">
+            {{ form_widget(form) }}
+            <p>
+                <button type="submit">Create</button>
+            </p>
+        </form>
+    </section >
+
+    <section  class="span4 pull-right">
+        <h2>Posting rules</h2>
+
+    </section>
+
+</ul>
+{% endblock %}

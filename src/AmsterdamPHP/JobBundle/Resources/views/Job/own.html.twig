@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h3 >Published Jobs</h3>
+
+
+    {% include 'AmsterdamPHPJobBundle:Job:list.html.twig' with {'entities': entities} %}
+
+{% endblock %}

@@ -1,0 +1,66 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    acl:
+        connection: default
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        job_posting:
+            pattern: ^/
+            security: true
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                default_target_path: job
+
+            logout:
+                path: /logout
+                target: job
+            anonymous:    true
+
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/demo/secured/login$
+            security: false
+
+        secured_area:
+            pattern:    ^/demo/secured/
+            form_login:
+                check_path: _security_check
+                login_path: _demo_login
+            logout:
+                path:   _demo_logout
+                target: _demo
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/job/new, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/job/create, roles: IS_AUTHENTICATED_FULLY }
+        #- { path: ^/job/.*/edit$, roles: IS_AUTHENTICATED_FULLY}
+        - { path: ^/job/update, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/job/delete, roles: IS_AUTHENTICATED_FULLY }

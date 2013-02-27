@@ -1,0 +1,38 @@
+body {
+    margin: 5%;
+}
+
+#details div.details {
+    text-align: justify;
+}
+
+#poster a.contact-recruiter {
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+    width: 150px;
+}
+
+#amsterdamphp_jobbundle_jobtype_expires select {
+    width: 70px;
+    margin-right: 10px;
+}
+
+#left {
+    position: relative;
+}
+
+form.new-job input,
+form.new-job textarea {
+    width: 100%;
+}
+
+form.new-job textarea {
+    height: 500px;
+}
+
+form.login input[type="text"],
+form.login input[type="password"] {
+    display: block;
+    clear: both;
+}

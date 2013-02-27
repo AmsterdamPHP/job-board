@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    <IfModule mod_vhost_alias.c>
+        RewriteBase /
+    </IfModule>
+
+    # redirect to URI without front controller to prevent duplicate content
+    RewriteRule ^app\.php(/(.*)|$) /$2 [R=301,END]
+
+    # rewrite requests to non-existent files to front controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ app.php [END]
+</IfModule>
