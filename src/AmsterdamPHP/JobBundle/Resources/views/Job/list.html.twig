@@ -1,0 +1,18 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="span6 text-left">Title</th>
+            <th class="span2 text-left">Location</th>
+            <th class="span2 text-left">Date Posted</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('job_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+            <td>{{ entity.location }}</td>
+            <td>{{ entity.created|date('Y-m-d')}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <h2>My Profile</h2>
+
+    {% block menu %}
+    <ul class="nav nav-pills">
+            <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
+            <li><a href="{{ path('fos_user_change_password') }}">Change Password</a></li>
+            <li><a href="{{ path('own_jobs') }}">My Published jobs</a></li>
+        </ul>
+    {% endblock %}
+
+    {% block fos_user_content %}
+        {% render controller('FOSUserBundle:Profile:edit') %}
+    {% endblock %}
+
+{% endblock %}

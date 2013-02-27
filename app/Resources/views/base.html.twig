@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %} AmsterdamPHP Job Board</title>
+
+        {% stylesheets
+            'assets/bootstrap/css/bootstrap.min.css'
+            'assets/Font-Awesome/css/font-awesome.min.css'
+            'assets/css/global.css'
+            output = '/css/main.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <header>
+            <h1>Amsterdam PHP <span>Job Board</span></h1>
+            <!-- <h1>&nbsp;</h1> -->
+
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <!-- Be sure to leave the brand out there if you want it shown -->
+                        <ul class="nav">
+                            <li class=""><a href="{{ path('job') }}"><i class="icon-home icon-large"></i> Home</a></li>
+                            <li><a href="{{ path('job_new') }}"><i class="icon-plus-sign icon-large"></i> Post new Job</a></li>
+
+                            {%  if is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-user icon-large"></i> My Account</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i> Logout</a></li>
+                            {% else %}
+                                <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-unlock icon-large"></i> Register</a></li>
+                                <li><a href="{{ path('login') }}"><i class="icon-signin icon-large"></i> Login</a></li>
+                            {% endif %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+
+        <section class="content">
+            {% block body %}
+                {% block fos_user_content %}{% endblock fos_user_content %}
+            {% endblock %}
+        </section>
+
+        <footer>
+            &copy; 2013 AmsterdamPHP - all rights reserved
+        </footer>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        {% javascripts
+            'assets/bootstrap/js/bootstrap.min.js'
+            output = '/js/main.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

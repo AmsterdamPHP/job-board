@@ -1,0 +1,97 @@
+body {
+    margin: 5%;
+}
+
+#details div.details {
+    text-align: justify;
+}
+
+#poster a.contact-recruiter {
+    display: block;
+    margin-top: 20px;
+    width: 150px;
+}
+
+#amsterdamphp_jobbundle_jobtype_expires select {
+    width: 70px;
+    margin-right: 10px;
+}
+
+#left {
+    position: relative;
+}
+
+form.new-job input,
+form.new-job textarea {
+    width: 100%;
+}
+
+form.new-job textarea {
+    height: 500px;
+}
+
+form.login input[type="text"],
+form.login input[type="password"] {
+    display: block;
+    clear: both;
+}
+
+.vcard {
+    display: table;
+}
+
+.vcard .photo {
+    float: left;
+}
+
+.vcard ul {
+    float: left;
+    margin-left: 10px;
+    display: block;
+    list-style: none;
+}
+.vcard ul li{
+    line-height: 20px;
+    display: block;
+    height: 20px;
+}
+
+.vcard .social a i{
+    color: #333;
+}
+
+.fos_user_user_show p {
+    display: block;
+    clear: both;
+}
+
+
+.fos_user_user_show a {
+    display: block;
+    clear: both;
+    width: 75px;
+    margin-top: 50px;
+}
+
+.owner.actions {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.owner.actions form {
+    display: inline;
+}
+
+section.content {
+    min-height: 500px;
+    display: table;
+    width: 100%;
+}
+
+footer {
+    margin-top: 30px;
+    padding-top: 10px;
+    font-size: 10px;
+
+    border-top: 1px dotted #c0c0c0;
+}

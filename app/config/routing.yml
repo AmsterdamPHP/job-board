@@ -1,0 +1,14 @@
+site_home:
+    pattern: /
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:index", offset:0, itemCount:10 }
+
+amsterdam_php_user:
+    resource: "@AmsterdamPHPUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+amsterdam_php_job:
+    resource: "@AmsterdamPHPJobBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
