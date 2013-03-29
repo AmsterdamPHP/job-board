@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ entity.title }}{% endblock %}
+{% block body -%}
+
+    <section id="details" class="span10 pull-left">
+        {% if is_granted('OWNER', entity) or is_granted('ROLE_ADMIN') %}
+            <div class="owner actions pull-right">
+                <a class="btn " href="{{ path('job_edit', {'id':entity.id}) }}"> <i class="icon-edit icon-large"></i> Edit</a>
+                <form method="post" action="{{ path('job_delete', {'id':entity.id}) }}" class="">
+                    <button type="submit" class="btn btn-danger"><i class="icon-trash icon-large"></i> Delete</button>
+                </form>
+            </div>
+        {% endif %}
+
+        <h2>{{ entity.title }}</h2>
+        <h3>{{ entity.location }} <small>{{ entity.created|date('d-m-Y') }}</small></h3>
+        <div class="details">{{ entity.description | nl2br}}</div>
+    </section>
+
+    <section id="poster" class="span4 pull-right">
+        <h2>Poster Info</h2>
+        <div class="vcard">
+            <img class="photo" src="{{ gravatar(entity.user.email) }}" />
+            <ul>
+
+                <li class="name"><strong>{{ entity.user.name }}</strong></li>
+                <li class="company"><i class="icon-info-sign"></i> {{ entity.user.company }}</li>
+                <li class="phone"><i class="icon-phone-sign"></i> {{ entity.user.phone }}</li>
+
+                <li class="social">
+                    {% if entity.user.linkedin %}
+                        <a target="_blank" href="{{ entity.user.linkedin }}"><i class="icon-linkedin-sign icon-large"></i></a>
+                    {% endif %}
+
+                    {% if entity.user.facebook %}
+                        <a target="_blank" href="{{ entity.user.facebook }}"><i class="icon-facebook-sign icon-large"></i></a>
+                    {% endif %}
+
+                    {% if entity.user.twitter %}
+                        <a target="_blank" href="{{ entity.user.twitter }}"><i class="icon-twitter-sign icon-large"></i></a>
+                    {% endif %}
+                </li>
+
+            </ul>
+
+        </div>
+        <p>
+        <a class="btn  btn-large contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
+           <i class="icon-comment icon-large"></i> Contact poster
+        </a>
+    </p>
+    </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+parameters:
+#    amsterdam_php_user.example.class: AmsterdamPHP\UserBundle\Example
+
+services:
+#    amsterdam_php_user.example:
+#        class: %amsterdam_php_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+#
+    amsterdamphp_user.registration.form.type:
+        class: AmsterdamPHP\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: amsterdamphp_user_registration }
+
+    amsterdamphp_user.profile.form.type:
+        class: AmsterdamPHP\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: amsterdamphp_user_profile }
