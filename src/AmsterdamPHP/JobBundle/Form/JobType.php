@@ -12,8 +12,22 @@ class JobType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('languageOfAd', 'choice', array(
+                'label' => 'Language',
+                'choices' => array('nl' => 'Dutch', 'en' => 'English')
+            ))
             ->add('description')
+            ->add('contractType', 'choice', array(
+                'label' => 'Type of contract',
+                'choices' => array('Full-time', 'Part-time', 'Freelance')
+            ))
             ->add('location')
+            ->add('salary', 'text', array(
+                'required' => false
+            ))
+            ->add('url', 'url', array(
+                'required' => false
+            ))
             ->add('expires', 'date', array( 'data' => new \DateTime("+1 month")))
         ;
     }

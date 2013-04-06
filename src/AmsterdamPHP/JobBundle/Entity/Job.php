@@ -4,37 +4,71 @@ namespace AmsterdamPHP\JobBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AmsterdamPHP\UserBundle\Entity\User;
+
 /**
- * Job
+ * @ORM\Entity
+ * @ORM\Table(name="jobs")
  */
 class Job
 {
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $title;
 
     /**
+     * @ORM\Column(type="text")
      * @var string
      */
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $languageOfAd;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $location;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $contractType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $salary;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
     private $created;
 
     /**
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
     private $expires;
@@ -42,9 +76,28 @@ class Job
     /**
      * User owning this object
      *
+     * @ORM\ManyToOne(targetEntity="AmsterdamPHP\UserBundle\Entity\User")
      * @var integer
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    private $blocked;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    private $archived;
+
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
+    private $notes;
 
     /**
      * Get id
@@ -192,5 +245,117 @@ class Job
     public function setLocation($location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageOfAd()
+    {
+        return $this->languageOfAd;
+    }
+
+    /**
+     * @param string $languageOfAd
+     */
+    public function setLanguageOfAd($languageOfAd)
+    {
+        $this->languageOfAd = $languageOfAd;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContractType()
+    {
+        return $this->contractType;
+    }
+
+    /**
+     * @param string $contractType
+     */
+    public function setContractType($contractType)
+    {
+        $this->contractType = $contractType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalary()
+    {
+        return $this->salary;
+    }
+
+    /**
+     * @param string $salary
+     */
+    public function setSalary($salary)
+    {
+        $this->salary = $salary;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getBlocked()
+    {
+        return $this->blocked;
+    }
+
+    /**
+     * @param boolean $blocked
+     */
+    public function setBlocked($blocked)
+    {
+        $this->blocked = $blocked;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param boolean $archived
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param string $notes
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
     }
 }
