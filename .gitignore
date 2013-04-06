@@ -14,3 +14,7 @@ app/config/parameters.yml
 
 
 /composer.phar
+
+# IntelliJ/PHPStorm
+*.iml
+.idea/*

@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: jobboard
+    database_user: jobs
+    database_password: symfony
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 2f82476aa8bd410f5a210e3ee71d2b10dfa
+    database_path: null
