@@ -18,3 +18,5 @@ app/config/parameters.yml
 # IntelliJ/PHPStorm
 *.iml
 .idea/*
+
+.DS_Store
