@@ -20,3 +20,4 @@ app/config/parameters.yml
 .idea/*
 
 .DS_Store
+.vagrant
