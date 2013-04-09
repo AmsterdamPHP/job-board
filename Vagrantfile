@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
   # config.vm.network :bridged
 
   config.vm.forward_port 80, 8080
+  config.vm.forward_port 443, 8443
 
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
   config.vm.share_folder "v-web", "/vagrant/www", "./", :nfs=>true

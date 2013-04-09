@@ -51,8 +51,24 @@ class lamp {
     require => Package[ 'lamp-server^' ],
   }
 
+  file {'/etc/apache2/sites-enabled/000-default':
+    ensure => file,
+    source => 'puppet:///modules/apache/000-default',
+    require => Package[ 'lamp-server^' ],
+  }
+  file {'/etc/apache2/ssl/apache.key':
+    ensure => file,
+    source => 'puppet:///modules/apache/apache.key',
+    require => Package[ 'lamp-server^' ],
+  }
+  file {'/etc/apache2/ssl/apache.pem':
+    ensure => file,
+    source => 'puppet:///modules/apache/apache.pem',
+    require => Package[ 'lamp-server^' ],
+  }
+
   exec { 'apache enable module':
-    command => 'a2enmod headers deflate rewrite',
+    command => 'a2enmod headers deflate rewrite ssl',
   }
   exec { 'Apache restart':
     command => '/etc/init.d/apache2 restart',
@@ -77,11 +93,6 @@ class lamp {
   exec { "create-database":
     unless  => "/usr/bin/mysql -ujobs -psymfony jobboard",
     command => "/usr/bin/mysql -uroot -proot -e \"create database jobboard; grant all on jobboard.* to jobs@localhost identified by 'jobs';\"",
-  }
-  exec { "set-mysql-password":
-    unless  => "mysql -uroot -proot",
-    path    => ["/bin", "/usr/bin"],
-    command => "mysqladmin -uroot password root",
   }
 
 }
