@@ -11,6 +11,8 @@ framework:
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: %kernel.debug%
+        http_port: %http_port%
+        https_port: %https_port%
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
@@ -67,7 +69,7 @@ swiftmailer:
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
+    firewall_name: job_posting
     user_class: AmsterdamPHP\UserBundle\Entity\User
 
     registration:

@@ -12,3 +12,5 @@ parameters:
     locale: en
     secret: 2f82476aa8bd410f5a210e3ee71d2b10dfa
     database_path: null
+    http_port: 80
+    https_port: 443
