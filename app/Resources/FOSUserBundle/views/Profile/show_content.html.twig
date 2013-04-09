@@ -3,11 +3,8 @@
     <p><span class="span2">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</span> {{ user.username }}</p>
     <p><span class="span2">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</span> {{ user.email }}</p>
 
-    <p><span class="span2">{{ 'profile.show.linkedin'|trans({}, 'FOSUserBundle') }}:</span> {{ user.linkedin }}</p>
-    <p><span class="span2">{{ 'profile.show.facebook'|trans({}, 'FOSUserBundle') }}:</span> {{ user.facebook }}</p>
-    <p><span class="span2">{{ 'profile.show.twitter'|trans({}, 'FOSUserBundle') }}:</span> {{ user.twitter }}</p>
-    <p><span class="span2">{{ 'profile.show.phone'|trans({}, 'FOSUserBundle') }}:</span> {{ user.phone }}</p>
-    <p><span class="span2">{{ 'profile.show.company'|trans({}, 'FOSUserBundle') }}:</span> {{ user.company }}</p>
+    <p><span class="span2">{{ 'profile.show.companyName'|trans({}, 'FOSUserBundle') }}:</span> {{ user.companyName }}</p>
+    <p><span class="span2">{{ 'profile.show.companyBio'|trans({}, 'FOSUserBundle') }}:</span> {{ user.companyBio }}</p>
 
     <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">Edit</a>
 </div>

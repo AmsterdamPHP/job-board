@@ -5,53 +5,56 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Simple user class
- *
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
+     */
+    protected $id;
 
     /**
      * Name of the user
      *
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $name;
 
     /**
-     * linkedin url
-     *
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $linkedin;
+    private $companyName;
 
     /**
-     * facebook url
-     *
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
-    private $facebook;
+    private $companyUrl;
 
     /**
-     * twitter has
-     *
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
-    private $twitter;
+    private $companyBio;
 
     /**
-     * phone number
-     *
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
-    private $phone;
+    private $companyLogo;
 
     /**
-     * Company name
-     *
-     * @var string
+     * @ORM\Column(type="boolean")
+     * @var bool
      */
-    private $company;
+    private $recruiter;
 
     /**
      * constructs the class
@@ -82,102 +85,82 @@ class User extends BaseUser
     }
 
     /**
-     * Gets the linkedin url.
-     *
      * @return string
      */
-    public function getLinkedin()
+    public function getCompanyName()
     {
-        return $this->linkedin;
+        return $this->companyName;
     }
 
     /**
-     * Sets the linkedin url.
-     *
-     * @param string $linkedin the linkedin
+     * @param string $companyName
      */
-    public function setLinkedin($linkedin)
+    public function setCompanyName($companyName)
     {
-        $this->linkedin = $linkedin;
+        $this->companyName = $companyName;
     }
 
     /**
-     * Gets the facebook url.
-     *
      * @return string
      */
-    public function getFacebook()
+    public function getCompanyUrl()
     {
-        return $this->facebook;
+        return $this->companyUrl;
     }
 
     /**
-     * Sets the facebook url.
-     *
-     * @param string $facebook the facebook
+     * @param string $companyUrl
      */
-    public function setFacebook($facebook)
+    public function setCompanyUrl($companyUrl)
     {
-        $this->facebook = $facebook;
+        $this->companyUrl = $companyUrl;
     }
 
     /**
-     * Gets the twitter has.
-     *
      * @return string
      */
-    public function getTwitter()
+    public function getCompanyBio()
     {
-        return $this->twitter;
+        return $this->companyBio;
     }
 
     /**
-     * Sets the twitter has.
-     *
-     * @param string $twitter the twitter
+     * @param string $companyBio
      */
-    public function setTwitter($twitter)
+    public function setCompanyBio($companyBio)
     {
-        $this->twitter = $twitter;
+        $this->companyBio = $companyBio;
     }
 
     /**
-     * Gets the phone number.
-     *
      * @return string
      */
-    public function getPhone()
+    public function getCompanyLogo()
     {
-        return $this->phone;
+        return $this->companyLogo;
     }
 
     /**
-     * Sets the phone number.
-     *
-     * @param string $phone the phone
+     * @param string $companyLogo
      */
-    public function setPhone($phone)
+    public function setCompanyLogo($companyLogo)
     {
-        $this->phone = $phone;
+        $this->companyLogo = $companyLogo;
     }
 
     /**
-     * Gets the Company name.
-     *
-     * @return string
+     * @return boolean
      */
-    public function getCompany()
+    public function isRecruiter()
     {
-        return $this->company;
+        return $this->recruiter;
     }
 
     /**
-     * Sets the Company name.
-     *
-     * @param string $company the company
+     * @param boolean $recruiter
      */
-    public function setCompany($company)
+    public function setRecruiter($recruiter)
     {
-        $this->company = $company;
+        $this->recruiter = $recruiter;
     }
 }

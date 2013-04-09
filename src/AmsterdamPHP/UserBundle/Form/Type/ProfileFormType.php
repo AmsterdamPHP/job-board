@@ -17,12 +17,7 @@ class ProfileFormType extends BaseType
     {
         parent::buildUserForm($builder, $options);
 
-        // add your custom field
         $builder->add('name', null, array('label' => 'form.name'));
-        $builder->add('linkedin', null, array('label' => 'form.linkedin'));
-        $builder->add('facebook', null, array('label' => 'form.facebook'));
-        $builder->add('twitter', null, array('label' => 'form.twitter'));
-        $builder->add('phone', null, array('label' => 'form.phone'));
         $builder->add('company', null, array('label' => 'form.company'));
     }
 

@@ -25,22 +25,7 @@
             <ul>
 
                 <li class="name"><strong>{{ entity.user.name }}</strong></li>
-                <li class="company"><i class="icon-info-sign"></i> {{ entity.user.company }}</li>
-                <li class="phone"><i class="icon-phone-sign"></i> {{ entity.user.phone }}</li>
-
-                <li class="social">
-                    {% if entity.user.linkedin %}
-                        <a target="_blank" href="{{ entity.user.linkedin }}"><i class="icon-linkedin-sign icon-large"></i></a>
-                    {% endif %}
-
-                    {% if entity.user.facebook %}
-                        <a target="_blank" href="{{ entity.user.facebook }}"><i class="icon-facebook-sign icon-large"></i></a>
-                    {% endif %}
-
-                    {% if entity.user.twitter %}
-                        <a target="_blank" href="{{ entity.user.twitter }}"><i class="icon-twitter-sign icon-large"></i></a>
-                    {% endif %}
-                </li>
+                <li class="company"><i class="icon-info-sign"></i> {{ entity.user.companyName }}</li>
 
             </ul>
 
