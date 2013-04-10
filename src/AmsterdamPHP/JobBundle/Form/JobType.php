@@ -14,7 +14,7 @@ class JobType extends AbstractType
             ->add('title')
             ->add('languageOfAd', 'choice', array(
                 'label' => 'Language',
-                'choices' => array('nl' => 'Dutch', 'en' => 'English')
+                'choices' => array('en' => 'English', 'nl' => 'Dutch')
             ))
             ->add('description')
             ->add('contractType', 'choice', array(
