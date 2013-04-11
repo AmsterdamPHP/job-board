@@ -17,8 +17,12 @@ class RegistrationFormType extends BaseType
     {
         parent::buildForm($builder, $options);
 
-        // add your custom field
-        $builder->add('name', 'text', array('label' => 'form.name'));
+        $builder->add('name', 'text', array('label' => 'Name'));
+        $builder->add('companyName', 'text', array('label' => 'Name of your company'));
+        $builder->add('companyUrl', 'url', array('label' => 'Url of your company'));
+        $builder->add('companyBio', 'textarea', array('label' => '(Short) description of your company'));
+        $builder->add('companyLogo', 'url', array('label' => 'Url of your company logo'));
+        $builder->add('recruiter', 'checkbox', array('label' => 'Are you a recruiter?', 'required' => false));
     }
 
     /**

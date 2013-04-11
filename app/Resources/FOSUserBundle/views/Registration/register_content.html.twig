@@ -1,0 +1,96 @@
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+    <div class="well">
+        With an account, you will be able to post jobs. You don't need to register if you want to apply for jobs.
+        To apply, just go to the job you are interested in and click the 'Contact' button.
+    </div>
+
+    {{ form_errors(form) }}
+    <div>
+        <div class="row">
+            <div class="span5">
+                <div class="span2">{{ form_label(form.name) }}</div>
+                <div class="span1">{{ form_errors(form.name) }}</div>
+                <div class="span2">{{ form_widget(form.name) }}</div>
+            </div>
+
+            <div class="span2">&nbsp;</div>
+
+            <div class="span5">
+                <div class="span2">{{ form_label(form.companyName) }}</div>
+                <div class="span1">{{ form_errors(form.companyName) }}</div>
+                <div class="span2">{{ form_widget(form.companyName) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span5">
+                <div class="span2">{{ form_label(form.username) }}</div>
+                <div class="span1">{{ form_errors(form.username) }}</div>
+                <div class="span2">{{ form_widget(form.username) }}</div>
+            </div>
+
+            <div class="span2">&nbsp;</div>
+
+            <div class="span5">
+                <div class="span2">{{ form_label(form.companyUrl) }}</div>
+                <div class="span1">{{ form_errors(form.companyUrl) }}</div>
+                <div class="span2">{{ form_widget(form.companyUrl) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span5">
+                <div class="span2">{{ form_label(form.email) }}</div>
+                <div class="span1">{{ form_errors(form.email) }}</div>
+                <div class="span2">{{ form_widget(form.email) }}</div>
+            </div>
+
+            <div class="span2">&nbsp;</div>
+
+            <div class="span5">
+                <div class="span2">{{ form_label(form.companyLogo) }}</div>
+                <div class="span1">{{ form_errors(form.companyLogo) }}</div>
+                <div class="span2">{{ form_widget(form.companyLogo) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span5">
+                <div class="span2">{{ form_label(form.plainPassword.first) }}</div>
+                <div class="span1">{{ form_errors(form.plainPassword.first) }}</div>
+                <div class="span2">{{ form_widget(form.plainPassword.first) }}</div>
+            </div>
+
+            <div class="span2">&nbsp;</div>
+
+            <div class="span5">
+                <div class="span2">{{ form_label(form.companyBio) }}</div>
+                <div class="span1">{{ form_errors(form.companyBio) }}</div>
+                <div class="span2">{{ form_widget(form.companyBio) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span5">
+                <div class="span2">{{ form_label(form.plainPassword.second) }}</div>
+                <div class="span1">{{ form_errors(form.plainPassword.second) }}</div>
+                <div class="span2">{{ form_widget(form.plainPassword.second) }}</div>
+            </div>
+
+            <div class="span2">&nbsp;</div>
+
+            <div class="span5">
+                <div class="span2">{{ form_label(form.recruiter) }}</div>
+                <div class="span1">{{ form_errors(form.recruiter) }}</div>
+                <div class="span2">{{ form_widget(form.recruiter) }}</div>
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+    </div>
+</form>

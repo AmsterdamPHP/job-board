@@ -17,8 +17,11 @@ class ProfileFormType extends BaseType
     {
         parent::buildUserForm($builder, $options);
 
-        $builder->add('name', null, array('label' => 'form.name'));
-        $builder->add('company', null, array('label' => 'form.company'));
+        $builder->add('companyName', 'text', array('label' => 'Name of your company'));
+        $builder->add('companyUrl', 'url', array('label' => 'Url of your company'));
+        $builder->add('companyBio', 'textarea', array('label' => '(Short) description of your company'));
+        $builder->add('companyLogo', 'url', array('label' => 'Url of your company logo'));
+        $builder->add('recruiter', 'checkbox', array('label' => 'Are you a recruiter?', 'required' => false));
     }
 
     /**

@@ -1,10 +1,12 @@
 <div class="fos_user_user_show">
-    <p><span class="span2">{{ 'profile.show.name'|trans({}) }}:</span> {{ user.name }}</p>
-    <p><span class="span2">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</span> {{ user.username }}</p>
-    <p><span class="span2">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</span> {{ user.email }}</p>
+    <p><span class="span3">{{ 'profile.show.name'|trans({}) }}:</span> <span class="span6">{{ user.name }}</span></p>
+    <p><span class="span3">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</span> <span class="span6">{{ user.username }}</span></p>
+    <p><span class="span3">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</span> <span class="span6">{{ user.email }}</span></p>
 
-    <p><span class="span2">{{ 'profile.show.companyName'|trans({}, 'FOSUserBundle') }}:</span> {{ user.companyName }}</p>
-    <p><span class="span2">{{ 'profile.show.companyBio'|trans({}, 'FOSUserBundle') }}:</span> {{ user.companyBio }}</p>
+    <p><span class="span3">{{ 'profile.show.company.name'|trans({}) }}:</span> <span class="span6">{{ user.companyName }}</span></p>
+    <p><span class="span3">{{ 'profile.show.company.url'|trans({}) }}:</span> <span class="span6"><a href="{{ user.companyUrl }}" target="_blank">{{ user.companyUrl }}</a></span></p>
+    <p><span class="span3">{{ 'profile.show.company.logo'|trans({}) }}:</span> <span class="span6"><img src="{{ user.companyLogo }}"></span></p>
+    <p><span class="span3">{{ 'profile.show.company.bio'|trans({}) }}:</span> <span class="span6">{{ user.companyBio }}</span></p>
 
     <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">Edit</a>
 </div>
