@@ -3,7 +3,7 @@
 {% block fos_user_content %}
     {% if app.request.attributes.get('_route') != 'login' %}
         <div class="alert alert-info">
-            <p><b>Authentication required!</b>  Please login to have access to this area</p>
+            <p><b>Authentication required!</b>  Please login to have access to this area, or register <a href="{{ path('fos_user_registration_register') }}">here</a></p>
         </div>
     {% endif %}
 
