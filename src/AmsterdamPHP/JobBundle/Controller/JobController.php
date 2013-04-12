@@ -2,7 +2,6 @@
 
 namespace AmsterdamPHP\JobBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AmsterdamPHP\JobBundle\Entity\Job;
@@ -12,6 +11,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use AmsterdamPHP\JobBundle\Form\ReportType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Job controller.
@@ -76,8 +77,12 @@ class JobController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $user = $this->get('security.context')->getToken()->getUser();
             $entity->setUser($user);
+
+            $entity->setCreated(new \DateTime());
+
             $em->persist($entity);
             $em->flush();
 
@@ -257,5 +262,59 @@ class JobController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function reportAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
+
+        $form = $this->createForm(new ReportType());
+
+        return $this->render('AmsterdamPHPJobBundle:Job:report.html.twig', array(
+            'form'   => $form->createView(),
+            'entity' => $entity,
+        ));
+    }
+
+    public function handleReportAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
+
+        $form = $this->createForm(new ReportType());
+        $form->bind($request);
+
+        if ( ! $form->isValid()) {
+            return $this->render('AmsterdamPHPJobBundle:Job:report.html.twig', array(
+                'form'   => $form->createView(),
+                'entity' => $entity,
+            ));
+        }
+
+        $data =$form->getData();
+        $reason = $data['reason'];
+        $name = $data['name'];
+        $email = $data['email'];
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Job abuse report')
+            ->setFrom('abuse@amsterdamphp.nl')
+            ->setTo('pascal.de.vink@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'AmsterdamPHPJobBundle:Job:report.txt.twig',
+                    array(
+                        'job'       => $entity,
+                        'reason'    => $reason,
+                        'name'      => $name,
+                        'email'     => $email,
+                    )
+                )
+            )
+        ;
+        $this->get('mailer')->send($message);
+
+        return $this->redirect($this->generateUrl('job_show', array('id' => $id)));
     }
 }

@@ -1,0 +1,15 @@
+Hi enabler,
+
+Just now, somebody reported a case of abuse about "{{ job.title }}".
+The given reason was:
+{{ reason }}
+
+{% if name %}
+Name: {{ name }}
+{% endif %}
+{% if email %}
+Email: {{ email }}
+{% endif %}
+
+You can check the job here: {{ url('job_show', { 'id': job.id }) }}
+

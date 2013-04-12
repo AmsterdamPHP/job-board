@@ -40,3 +40,13 @@ job_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:delete" }
     requirements: { _method: post|delete }
+
+job_report:
+    pattern: /{id}/report
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:report" }
+    requirements: { _method: get }
+
+job_handle_report:
+    pattern: /{id}/report
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:handleReport" }
+    requirements: { _method: post|put }

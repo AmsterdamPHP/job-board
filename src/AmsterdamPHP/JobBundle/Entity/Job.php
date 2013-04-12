@@ -85,16 +85,16 @@ class Job
      * @ORM\Column(type="boolean")
      * @var bool
      */
-    private $blocked;
+    private $blocked = false;
 
     /**
      * @ORM\Column(type="boolean")
      * @var bool
      */
-    private $archived;
+    private $archived = false;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $notes;

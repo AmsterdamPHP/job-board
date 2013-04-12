@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Report job</h1>
+
+    <form action="{{ path('job_handle_report', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Report</button>
+        </p>
+    </form>
+{% endblock %}
