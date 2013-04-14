@@ -10,6 +10,18 @@ job:
         itemCount: \d+
         _method: Get
 
+job_search_redirect:
+    pattern: /search
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:searchRedirect" }
+
+job_search:
+    pattern: /search/{query}/{offset}/{itemCount}
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:search", offset:0, itemCount:10 }
+    requirements:
+        offset: \d+
+        itemCount: \d+
+        _method: get
+
 own_jobs:
     pattern: /user
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:own" }

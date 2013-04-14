@@ -39,6 +39,12 @@
                             {% endif %}
                         </ul>
 
+                        <form class="navbar-search form-search pull-right" action="{{ path('job_search_redirect') }}" method="get">
+                            <div class="input-append">
+                                <input type="text" class="search-query" name="query" placeholder="Search">
+                                <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

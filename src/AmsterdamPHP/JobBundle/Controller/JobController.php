@@ -13,6 +13,7 @@ use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AmsterdamPHP\JobBundle\Form\ReportType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Job controller.
@@ -59,6 +60,43 @@ class JobController extends Controller
         $orderBy = array('id'=>'desc');
 
         $entities = $em->getRepository('AmsterdamPHPJobBundle:Job')->findBy($criteria, $orderBy, $itemCount, $offset);
+
+        return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+
+    public function searchRedirectAction(Request $request)
+    {
+        $query = $request->get('query');
+
+        if (empty($query))
+        {
+            return $this->redirect($this->generateUrl('job'));
+        }
+
+        return $this->redirect($this->generateUrl('job_search', array('query' => $query)));
+    }
+
+    public function searchAction($query, $itemCount = 10, $offset = 0)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var $repository EntityRepository */
+        $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
+
+        // TODO: Replace this with actual full-text searching
+        $queryBuilder = $repository->createQueryBuilder('job');
+        $query = $queryBuilder
+            ->where($queryBuilder->expr()->like('job.title', ':query'))
+            ->orWhere($queryBuilder->expr()->like('job.description', ':query'))
+            ->setParameter('query', "%$query%")
+            ->orderBy('job.id', 'desc')
+            ->setFirstResult($offset)
+            ->setMaxResults($itemCount)
+            ->getQuery();
+
+        $entities = $query->getResult();
 
         return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
             'entities' => $entities,
