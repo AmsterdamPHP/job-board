@@ -24,6 +24,7 @@ class AppKernel extends Kernel
 
             new AmsterdamPHP\JobBundle\AmsterdamPHPJobBundle(),
             new AmsterdamPHP\UserBundle\AmsterdamPHPUserBundle(),
+            new AmsterdamPHP\AdminBundle\AmsterdamPHPAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

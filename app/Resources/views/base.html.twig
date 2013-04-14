@@ -25,7 +25,7 @@
             <div class="navbar navbar-inverse">
                 <div class="navbar-inner">
                     <div class="container">
-                        <!-- Be sure to leave the brand out there if you want it shown -->
+                        {% block navigation %}
                         <ul class="nav">
                             <li class=""><a href="{{ path('job') }}"><i class="icon-home icon-large"></i> Home</a></li>
                             <li><a href="{{ path('job_new') }}"><i class="icon-plus-sign icon-large"></i> Post new Job</a></li>
@@ -45,11 +45,10 @@
                                 <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button>
                             </div>
                         </form>
+                        {% endblock %}
                     </div>
                 </div>
             </div>
-
-
         </header>
 
         <section class="content">

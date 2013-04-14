@@ -10,5 +10,9 @@ amsterdam_php_job:
     resource: "@AmsterdamPHPJobBundle/Resources/config/routing.yml"
     prefix:   /
 
+amsterdam_php_admin:
+    resource: "@AmsterdamPHPAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
 
 

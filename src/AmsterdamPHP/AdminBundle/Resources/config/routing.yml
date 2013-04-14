@@ -1,0 +1,3 @@
+overview:
+    pattern:  /
+    defaults: { _controller: AmsterdamPHPAdminBundle:Default:index }

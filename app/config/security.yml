@@ -37,25 +37,21 @@ security:
                 target: job
             anonymous:    true
 
+        admin:
+            pattern: ^/admin
+            security: true
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                default_target_path: overview
+            logout:
+                path: /logout
+                target: job
+            anonymous:    false
+
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-#        login:
-#            pattern:  ^/demo/secured/login$
-#            security: false
-#
-#        secured_area:
-#            pattern:    ^/demo/secured/
-#            form_login:
-#                check_path: _security_check
-#                login_path: _demo_login
-#            logout:
-#                path:   _demo_logout
-#                target: _demo
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
@@ -64,3 +60,4 @@ security:
         - { path: ^/job/.*/edit$, roles: IS_AUTHENTICATED_FULLY}
         - { path: ^/job/update, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/job/delete, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
