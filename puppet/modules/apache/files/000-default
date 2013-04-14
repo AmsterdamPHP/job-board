@@ -1,12 +1,12 @@
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
 
-        DocumentRoot /var/www
+        DocumentRoot /vagrant/web
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
         </Directory>
-        <Directory /var/www/>
+        <Directory /vagrant/web/>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
                 Order allow,deny
@@ -25,12 +25,12 @@
 <VirtualHost *:443>
         ServerAdmin webmaster@localhost
 
-        DocumentRoot /var/www
+        DocumentRoot /vagrant/web
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
         </Directory>
-        <Directory /var/www/>
+        <Directory /vagrant/web/>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
                 Order allow,deny
