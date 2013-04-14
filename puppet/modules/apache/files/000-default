@@ -7,8 +7,8 @@
                 AllowOverride None
         </Directory>
         <Directory /vagrant/web/>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
+                Options FollowSymLinks MultiViews
+                AllowOverride All
                 Order allow,deny
                 allow from all
         </Directory>
@@ -31,8 +31,8 @@
                 AllowOverride None
         </Directory>
         <Directory /vagrant/web/>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
+                Options FollowSymLinks MultiViews
+                AllowOverride All
                 Order allow,deny
                 allow from all
         </Directory>
