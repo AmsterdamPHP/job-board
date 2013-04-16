@@ -9,3 +9,9 @@ admin_jobs:
         offset: \d+
         itemCount: \d+
         _method: Get
+
+admin_archive_job:
+    pattern: /job/{id}/archive
+    defaults: { _controller: "AmsterdamPHPAdminBundle:Job:archive" }
+    requirements:
+        offset: \d+

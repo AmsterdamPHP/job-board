@@ -14,7 +14,7 @@
             <td><a href="{{ path('job_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{{ entity.location }}</td>
             <td>{{ entity.created|date('Y-m-d')}}</td>
-            <td><a href="">Archive</a></td>
+            <td>{% if not entity.archived %}<a href="{{ path('admin_archive_job', {'id': entity.id}) }}">Archive</a>{% endif %}</td>
             <td><a href="">Delete</a></td>
         </tr>
     {% endfor %}
