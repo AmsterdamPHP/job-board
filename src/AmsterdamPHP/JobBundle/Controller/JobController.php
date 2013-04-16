@@ -33,10 +33,19 @@ class JobController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
 
-        $criteria = array('user' => $user);
-        $orderBy = array('id'=>'desc');
+        /** @var $repository EntityRepository */
+        $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
 
-        $entities = $em->getRepository('AmsterdamPHPJobBundle:Job')->findBy($criteria, $orderBy);
+        $queryBuilder = $repository->createQueryBuilder('job');
+        $query = $queryBuilder
+            ->where('job.user = :user')
+            ->andWhere('job.blocked = 0')
+            ->andWhere('job.archived = 0')
+            ->orderBy('job.id', 'desc')
+            ->getQuery()
+            ->setParameter('user', $user);
+
+        $entities = $query->getResult();
 
         return $this->render('AmsterdamPHPJobBundle:Job:own.html.twig', array(
             'entities' => $entities,
@@ -52,14 +61,20 @@ class JobController extends Controller
      */
     public function indexAction($itemCount = 10, $offset = 0)
     {
-
         $em = $this->getDoctrine()->getManager();
 
+        /** @var $repository EntityRepository */
+        $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
 
-        $criteria = array();
-        $orderBy = array('id'=>'desc');
+        $queryBuilder = $repository->createQueryBuilder('job');
+        $query = $queryBuilder
+            ->where('job.blocked = 0')
+            ->andWhere('job.archived = 0')
+            ->setMaxResults($itemCount)
+            ->setFirstResult($offset)
+            ->getQuery();
 
-        $entities = $em->getRepository('AmsterdamPHPJobBundle:Job')->findBy($criteria, $orderBy, $itemCount, $offset);
+        $entities = $query->getResult();
 
         return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
             'entities' => $entities,

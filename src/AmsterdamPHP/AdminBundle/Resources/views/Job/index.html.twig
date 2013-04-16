@@ -1,0 +1,8 @@
+{% extends '::adminbase.html.twig' %}
+
+{% block body -%}
+    <h3 >All jobs</h3>
+
+    {% include 'AmsterdamPHPAdminBundle:Job:list.html.twig' with {'entities': entities} %}
+
+{% endblock %}

@@ -1,3 +1,11 @@
-overview:
+admin_overview:
     pattern:  /
     defaults: { _controller: AmsterdamPHPAdminBundle:Default:index }
+
+admin_jobs:
+    pattern:  /list/{offset}/{itemCount}
+    defaults: { _controller: "AmsterdamPHPAdminBundle:Job:list", offset:0, itemCount:10 }
+    requirements:
+        offset: \d+
+        itemCount: \d+
+        _method: Get
