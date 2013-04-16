@@ -27,7 +27,35 @@ class JobController extends Controller
     {
         /** @var $em EntityManager */
         $em = $this->getDoctrine()->getManager();
+        $entity = $this->getJobById($em, $id);
 
+        $entity->setArchived(true);
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_jobs'));
+    }
+
+    public function blockAction($id)
+    {
+        /** @var $em EntityManager */
+        $em = $this->getDoctrine()->getManager();
+        $entity = $this->getJobById($em, $id);
+
+        $entity->setBlocked(true);
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_jobs'));
+    }
+
+    /**
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param $id
+     * @return Job
+     */
+    protected function getJobById(EntityManager $em, $id)
+    {
         /** @var $repository EntityRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
 
@@ -35,10 +63,6 @@ class JobController extends Controller
         /** @var $entity Job */
         $entity = $repository->findOneBy($criteria);
 
-        $entity->setArchived(true);
-        $em->persist($entity);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('admin_jobs'));
+        return $entity;
     }
 }

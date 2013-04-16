@@ -15,3 +15,9 @@ admin_archive_job:
     defaults: { _controller: "AmsterdamPHPAdminBundle:Job:archive" }
     requirements:
         offset: \d+
+
+admin_block_job:
+    pattern: /job/{id}/block
+    defaults: { _controller: "AmsterdamPHPAdminBundle:Job:block" }
+    requirements:
+        offset: \d+

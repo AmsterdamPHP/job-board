@@ -5,7 +5,7 @@
         <th class="span2 text-left">Location</th>
         <th class="span2 text-left">Date Posted</th>
         <th class="span2 text-left">Archive</th>
-        <th class="span2 text-left">Delete</th>
+        <th class="span2 text-left">Block</th>
     </tr>
     </thead>
     <tbody>
@@ -15,7 +15,7 @@
             <td>{{ entity.location }}</td>
             <td>{{ entity.created|date('Y-m-d')}}</td>
             <td>{% if not entity.archived %}<a href="{{ path('admin_archive_job', {'id': entity.id}) }}">Archive</a>{% endif %}</td>
-            <td><a href="">Delete</a></td>
+            <td>{% if not entity.blocked %}<a href="{{ path('admin_block_job', {'id': entity.id}) }}">Block</a>{% endif %}</td>
         </tr>
     {% endfor %}
     </tbody>
