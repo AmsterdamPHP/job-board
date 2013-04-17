@@ -81,3 +81,6 @@ fos_user:
 jms_security_extra:
     expressions: ~
 
+amsterdam_php_job:
+    google_analytics_ua_code: %google_analytics_ua_code%
+    google_analytics_url: %google_analytics_url%

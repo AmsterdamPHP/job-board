@@ -10,7 +10,9 @@ parameters:
     mailer_user: null
     mailer_password: null
     locale: en
-    secret: 2f82476aa8bd410f5a210e3ee71d2b10dfa
+    secret: 9834758934573975954
     database_path: null
     http_port: 80
     https_port: 443
+    google_analytics_ua_code:
+    google_analytics_url:
