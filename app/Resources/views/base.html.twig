@@ -4,8 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}{% endblock %} AmsterdamPHP Job Board</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         {% stylesheets
             'assets/bootstrap/css/bootstrap.min.css'
+            'assets/bootstrap/css/bootstrap-responsive.min.css'
             'assets/Font-Awesome/css/font-awesome.min.css'
             'assets/css/global.css'
             output = '/css/main.css'
@@ -19,32 +22,47 @@
     <body>
 
         <header>
-            <h1>Amsterdam PHP <span>Job Board</span></h1>
-            <!-- <h1>&nbsp;</h1> -->
+            <h1 class="visible-desktop">Amsterdam PHP <span>Job Board</span></h1>
 
             <div class="navbar navbar-inverse">
                 <div class="navbar-inner">
                     <div class="container">
                         {% block navigation %}
-                        <ul class="nav">
-                            <li class=""><a href="{{ path('job') }}"><i class="icon-home icon-large"></i> Home</a></li>
-                            <li><a href="{{ path('job_new') }}"><i class="icon-plus-sign icon-large"></i> Post new Job</a></li>
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
 
-                            {%  if is_granted('ROLE_USER') %}
-                                <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-user icon-large"></i> My Account</a></li>
-                                <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i> Logout</a></li>
-                            {% else %}
-                                <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-unlock icon-large"></i> Register</a></li>
-                                <li><a href="{{ path('login') }}"><i class="icon-signin icon-large"></i> Login</a></li>
-                            {% endif %}
-                        </ul>
+                        <a class="brand hidden-desktop" href="{{ path('job') }}">
+                            AmsterdamPHP
+                            <span style="display: inline">
+                                <span class="visible-phone">Jobs</span>
+                                <span class="hidden-phone">Job Board</span>
+                            </span>
+                        </a>
 
-                        <form class="navbar-search form-search pull-right" action="{{ path('job_search_redirect') }}" method="get">
-                            <div class="input-append">
-                                <input type="text" class="search-query" name="query" placeholder="Search">
-                                <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button>
-                            </div>
-                        </form>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li class=""><a href="{{ path('job') }}"><i class="icon-home icon-large"></i> Home</a></li>
+                                <li><a href="{{ path('job_new') }}"><i class="icon-plus-sign icon-large"></i> Post new Job</a></li>
+
+                                {%  if is_granted('ROLE_USER') %}
+                                    <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-user icon-large"></i> My Account</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i> Logout</a></li>
+                                {% else %}
+                                    <li><a href="{{ path('fos_user_registration_register') }}"><i class="icon-unlock icon-large"></i> Register</a></li>
+                                    <li><a href="{{ path('login') }}"><i class="icon-signin icon-large"></i> Login</a></li>
+                                {% endif %}
+                            </ul>
+
+                            <form class="navbar-search form-search pull-right" action="{{ path('job_search_redirect') }}" method="get">
+                                <div class="input-append">
+                                    <input type="text" class="search-query" name="query" placeholder="Search">
+                                    <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button>
+                                </div>
+                            </form>
+                        </div>
                         {% endblock %}
                     </div>
                 </div>
