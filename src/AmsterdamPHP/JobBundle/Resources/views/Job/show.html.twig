@@ -3,7 +3,8 @@
 {% block title %}{{ entity.title }}{% endblock %}
 
 {% block body -%}
-    <section id="details" class="span10 pull-left" xmlns="http://www.w3.org/1999/html">
+<div class="row-fluid">
+    <section id="details" class="span8 pull-left" xmlns="http://www.w3.org/1999/html">
         <div class="pull-right">
             <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
                 <i class="icon-comment icon-large"></i> Contact poster
@@ -54,4 +55,5 @@
             {{ entity.user.companyBio }}
         </div>
     </section>
+</div>
 {% endblock %}
