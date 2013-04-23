@@ -2,6 +2,13 @@ parameters:
 #    amsterdam_php_job.example.class: AmsterdamPHP\JobBundle\Example
 
 services:
-#    amsterdam_php_job.example:
-#        class: %amsterdam_php_job.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    job_rating_update_listener:
+        class: AmsterdamPHP\JobBundle\EventListener\JobRatingUpdater
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    sen_abuse_report_listener:
+        class: AmsterdamPHP\JobBundle\EventListener\AbuseReportMailer
+        arguments: [@templating, @mailer]
+        tags:
+            - { name: kernel.event_listener, event:send_abuse_report, method:onEvent }

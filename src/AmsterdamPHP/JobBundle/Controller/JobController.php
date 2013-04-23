@@ -13,7 +13,10 @@ use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AmsterdamPHP\JobBundle\Form\ReportType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Form;
+use AmsterdamPHP\JobBundle\Entity\JobRepository;
+use AmsterdamPHP\JobBundle\EventListener\AbuseReportEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Job controller.
@@ -29,26 +32,15 @@ class JobController extends Controller
      */
     public function ownAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
         $user = $this->get('security.context')->getToken()->getUser();
 
-        /** @var $repository EntityRepository */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $repository JobRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
-
-        $queryBuilder = $repository->createQueryBuilder('job');
-        $query = $queryBuilder
-            ->where('job.user = :user')
-            ->andWhere('job.blocked = 0')
-            ->andWhere('job.archived = 0')
-            ->orderBy('job.id', 'desc')
-            ->getQuery()
-            ->setParameter('user', $user);
-
-        $entities = $query->getResult();
+        $jobs = $repository->getJobByUser($user);
 
         return $this->render('AmsterdamPHPJobBundle:Job:own.html.twig', array(
-            'entities' => $entities,
+            'entities' => $jobs,
         ));
     }
     /**
@@ -62,22 +54,12 @@ class JobController extends Controller
     public function indexAction($itemCount = 10, $offset = 0)
     {
         $em = $this->getDoctrine()->getManager();
-
-        /** @var $repository EntityRepository */
+        /** @var $repository JobRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
-
-        $queryBuilder = $repository->createQueryBuilder('job');
-        $query = $queryBuilder
-            ->where('job.blocked = 0')
-            ->andWhere('job.archived = 0')
-            ->setMaxResults($itemCount)
-            ->setFirstResult($offset)
-            ->getQuery();
-
-        $entities = $query->getResult();
+        $jobs = $repository->getJobsList($itemCount, $offset);
 
         return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $jobs,
         ));
     }
 
@@ -97,24 +79,14 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        /** @var $repository EntityRepository */
+        /** @var $repository JobRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
 
         // TODO: Replace this with actual full-text searching
-        $queryBuilder = $repository->createQueryBuilder('job');
-        $query = $queryBuilder
-            ->where($queryBuilder->expr()->like('job.title', ':query'))
-            ->orWhere($queryBuilder->expr()->like('job.description', ':query'))
-            ->setParameter('query', "%$query%")
-            ->orderBy('job.id', 'desc')
-            ->setFirstResult($offset)
-            ->setMaxResults($itemCount)
-            ->getQuery();
-
-        $entities = $query->getResult();
+        $jobs = $repository->searchJobsByKeyword($query, $itemCount, $offset);
 
         return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $jobs,
         ));
     }
 
@@ -183,18 +155,20 @@ class JobController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var $entityRepository JobRepository */
+        $entityRepository = $em->getRepository('AmsterdamPHPJobBundle:Job');
+        $job = $entityRepository->getJobById($id);
 
-        $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
-
-        if (!$entity) {
+        if ( ! $job) {
             throw $this->createNotFoundException('Unable to find Job entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AmsterdamPHPJobBundle:Job:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'entity'      => $job,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -204,7 +178,6 @@ class JobController extends Controller
      */
     public function editAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
@@ -289,12 +262,12 @@ class JobController extends Controller
         }
 
         if (
-        false === $this->get('security.context')->isGranted('OWNER', $entity) &&
-        false === $this->get('security.context')->isGranted('ROLE_ADMIN')
-
-        ) {
+            false === $this->get('security.context')->isGranted('OWNER', $entity) &&
+            false === $this->get('security.context')->isGranted('ROLE_ADMIN')
+        )
+        {
             throw new AccessDeniedException();
-         }
+        }
 
         $em->remove($entity);
         $em->flush();
@@ -307,7 +280,7 @@ class JobController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm($id)
     {
@@ -350,23 +323,15 @@ class JobController extends Controller
         $name = $data['name'];
         $email = $data['email'];
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Job abuse report')
-            ->setFrom('abuse@amsterdamphp.nl')
-            ->setTo('pascal.de.vink@gmail.com')
-            ->setBody(
-                $this->renderView(
-                    'AmsterdamPHPJobBundle:Job:report.txt.twig',
-                    array(
-                        'job'       => $entity,
-                        'reason'    => $reason,
-                        'name'      => $name,
-                        'email'     => $email,
-                    )
-                )
-            )
-        ;
-        $this->get('mailer')->send($message);
+        $abuseReportEvent = new AbuseReportEvent();
+        $abuseReportEvent->setJob($entity);
+        $abuseReportEvent->setName($name);
+        $abuseReportEvent->setEmail($email);
+        $abuseReportEvent->setReason($reason);
+
+        /** @var $dispatcher EventDispatcher */
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch('send_abuse_report', $abuseReportEvent);
 
         return $this->redirect($this->generateUrl('job_show', array('id' => $id)));
     }
