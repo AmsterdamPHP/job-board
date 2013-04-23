@@ -6,8 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use AmsterdamPHP\UserBundle\Entity\User;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="jobs")
+ * @ORM\Entity(repositoryClass="AmsterdamPHP\JobBundle\Entity\JobRepository")
  */
 class Job
 {
@@ -77,7 +77,7 @@ class Job
      * User owning this object
      *
      * @ORM\ManyToOne(targetEntity="AmsterdamPHP\UserBundle\Entity\User")
-     * @var integer
+     * @var User
      */
     private $user;
 
@@ -98,6 +98,18 @@ class Job
      * @var string
      */
     private $notes;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $calculatedRating;
+
+    /**
+     * @ORM\OneToMany(targetEntity="JobRating", mappedBy="job")
+     * @var JobRating[]
+     */
+    private $ratings;
 
     /**
      * Get id
@@ -357,5 +369,31 @@ class Job
     public function setNotes($notes)
     {
         $this->notes = $notes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCalculatedRating()
+    {
+        return $this->calculatedRating;
+    }
+
+    /**
+     * @param int $calculatedRating
+     */
+    public function setCalculatedRating($calculatedRating)
+    {
+        $this->calculatedRating = $calculatedRating;
+    }
+
+    public function getRatings()
+    {
+        return $this->ratings;
+    }
+
+    public function setRatings($ratings)
+    {
+        $this->ratings = $ratings;
     }
 }
