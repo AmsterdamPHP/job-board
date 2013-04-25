@@ -28,7 +28,8 @@
         <h4>
             {{ entity.location }} <small>{{ entity.created|date('d-m-Y') }}</small>
             <input type="range" min="0" max="5" value="{{ entity.calculatedRating }}" step="1" id="jobRating">
-            <div class="rateit" data-rateit-backingfld="#jobRating" data-rateit-resetable="false" ></div>
+            <div id="jobRatingWrapper" class="rateit" data-rateit-backingfld="#jobRating"
+                 data-rateit-resetable="false" data-jobid="{{ entity.id }}" data-rateit-readonly="{{ ratedJob }}" ></div>
         </h4>
 
         <div class="details">{{ entity.description | nl2br}}</div>
@@ -77,12 +78,19 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
     {% javascripts
+    '@AmsterdamPHPJobBundle/Resources/public/js/jquery.cookie.js'
     '@AmsterdamPHPJobBundle/Resources/public/js/jquery.rateit.js'
-    output = '/js/main.js'
+    '@AmsterdamPHPJobBundle/Resources/public/js/jobs.js'
+    output = '/js/show.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var jobRating = new JobRating();
+        jobRating.init();
+    </script>
 {% endblock %}

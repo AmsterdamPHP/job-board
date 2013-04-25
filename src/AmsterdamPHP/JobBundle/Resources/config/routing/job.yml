@@ -1,7 +1,3 @@
-#job:
-#    pattern:  /
-#    defaults: { _controller: "AmsterdamPHPJobBundle:Job:index" }
-
 job:
     pattern:  /list/{offset}/{itemCount}
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:index", offset:0, itemCount:10 }
@@ -29,6 +25,8 @@ own_jobs:
 job_show:
     pattern:  /{id}/show
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:show" }
+    requirements:
+        id: \d+
 
 job_new:
     pattern:  /new
@@ -42,23 +40,40 @@ job_create:
 job_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:edit" }
+    requirements:
+        id: \d+
 
 job_update:
     pattern:  /{id}/update
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:update" }
-    requirements: { _method: post|put }
+    requirements:
+        _method: post|put
+        id: \d+
 
 job_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:delete" }
-    requirements: { _method: post|delete }
+    requirements:
+        _method: post|delete
+        id: \d+
 
 job_report:
     pattern: /{id}/report
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:report" }
-    requirements: { _method: get }
+    requirements:
+        _method: get
+        id: \d+
 
 job_handle_report:
     pattern: /{id}/report
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:handleReport" }
-    requirements: { _method: post|put }
+    requirements:
+        _method: post|put
+        id: \d+
+
+job_handle_rating:
+    pattern: /{id}/rate
+    defaults: { _controller: "AmsterdamPHPJobBundle:Job:handleRating" }
+    requirements:
+        _method: post|put
+        id: \d+

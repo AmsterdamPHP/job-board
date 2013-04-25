@@ -17,6 +17,10 @@ use Symfony\Component\Form\Form;
 use AmsterdamPHP\JobBundle\Entity\JobRepository;
 use AmsterdamPHP\JobBundle\EventListener\AbuseReportEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use AmsterdamPHP\JobBundle\Entity\JobRatingRepository;
+use AmsterdamPHP\JobBundle\Entity\JobRating;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Job controller.
@@ -152,7 +156,7 @@ class JobController extends Controller
      * Finds and displays a Job entity.
      *
      */
-    public function showAction($id)
+    public function showAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         /** @var $entityRepository JobRepository */
@@ -160,14 +164,18 @@ class JobController extends Controller
         $job = $entityRepository->getJobById($id);
 
         if ( ! $job) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Unable to find Job.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $ratedJobs = json_decode($request->cookies->get('ratedJobs'));
+        $ratedJob = in_array($job->getId(), $ratedJobs);
+
         return $this->render('AmsterdamPHPJobBundle:Job:show.html.twig', array(
             'entity'      => $job,
             'delete_form' => $deleteForm->createView(),
+            'ratedJob'    => $ratedJob,
         ));
     }
 
@@ -184,7 +192,7 @@ class JobController extends Controller
 
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Unable to find Job.');
         }
 
          if (
@@ -216,7 +224,7 @@ class JobController extends Controller
         $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Unable to find Job.');
         }
 
         if (
@@ -258,7 +266,7 @@ class JobController extends Controller
         $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Unable to find Job.');
         }
 
         if (
@@ -334,5 +342,28 @@ class JobController extends Controller
         $dispatcher->dispatch('send_abuse_report', $abuseReportEvent);
 
         return $this->redirect($this->generateUrl('job_show', array('id' => $id)));
+    }
+
+    public function handleRatingAction(Request $request, $id)
+    {
+        /** @var $em EntityManager */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $job Job */
+        $job = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
+
+        if ( ! $job) {
+            throw $this->createNotFoundException('Unable to find Job.');
+        }
+
+        $rating = (float)$request->get('rating');
+
+        $jobRating = new JobRating();
+        $jobRating->setJob($job);
+        $jobRating->setRating($rating);
+
+        $em->persist($jobRating);
+        $em->flush();
+
+        return new Response((int)$job->getId(), 200);
     }
 }
