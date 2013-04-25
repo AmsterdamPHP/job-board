@@ -170,7 +170,7 @@ class JobController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         $ratedJobs = json_decode($request->cookies->get('ratedJobs'));
-        $ratedJob = in_array($job->getId(), $ratedJobs);
+        $ratedJob = is_array($ratedJobs) ? in_array($job->getId(), $ratedJobs) : false;
 
         return $this->render('AmsterdamPHPJobBundle:Job:show.html.twig', array(
             'entity'      => $job,

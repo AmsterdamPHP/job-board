@@ -32,7 +32,6 @@ var JobRating = chic.Class.extend({
             ratedJobs.push(data);
 
             $.cookie('ratedJobs', ratedJobs, { path: '/' });
-            console.log($.cookie('ratedJobs'));
         });
     }
 });

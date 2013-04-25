@@ -3,6 +3,7 @@
 namespace AmsterdamPHP\JobBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * JobRating
@@ -34,6 +35,14 @@ class JobRating
      * @ORM\Column(name="rating", type="integer")
      */
     private $rating;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $created;
 
 
     /**
@@ -90,5 +99,21 @@ class JobRating
     public function getRating()
     {
         return $this->rating;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
     }
 }

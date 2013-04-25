@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
             new AmsterdamPHP\JobBundle\AmsterdamPHPJobBundle(),
             new AmsterdamPHP\UserBundle\AmsterdamPHPUserBundle(),
@@ -28,7 +29,6 @@ class AppKernel extends Kernel
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            // $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
