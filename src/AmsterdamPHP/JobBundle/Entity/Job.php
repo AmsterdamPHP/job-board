@@ -100,10 +100,10 @@ class Job
     private $notes;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      * @var integer
      */
-    private $calculatedRating;
+    private $calculatedRating = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="JobRating", mappedBy="job")
