@@ -2,6 +2,7 @@
 
 namespace AmsterdamPHP\JobBundle\Controller;
 
+use AmsterdamPHP\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AmsterdamPHP\JobBundle\Entity\Job;
@@ -17,7 +18,6 @@ use Symfony\Component\Form\Form;
 use AmsterdamPHP\JobBundle\Entity\JobRepository;
 use AmsterdamPHP\JobBundle\EventListener\AbuseReportEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use AmsterdamPHP\JobBundle\Entity\JobRatingRepository;
 use AmsterdamPHP\JobBundle\Entity\JobRating;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,23 +30,28 @@ class JobController extends Controller
 {
 
     /**
-     * list all jobes owned by user
+     * list all jobs owned by user
      *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @return Response
      */
     public function ownAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
 
+        if ( ! ($user instanceof User))
+            throw new AccessDeniedException();
+
         $em = $this->getDoctrine()->getManager();
         /** @var $repository JobRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
-        $jobs = $repository->getJobByUser($user);
+        $jobs = $repository->getJobsByUser($user);
 
         return $this->render('AmsterdamPHPJobBundle:Job:own.html.twig', array(
             'entities' => $jobs,
         ));
     }
+
     /**
      * Lists all Job entities.
      *
