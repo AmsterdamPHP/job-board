@@ -25,5 +25,11 @@ monolog:
 assetic:
     use_controller: true
 
+doctrine:
+    orm:
+        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
 #swiftmailer:
 #    delivery_address: me@example.com

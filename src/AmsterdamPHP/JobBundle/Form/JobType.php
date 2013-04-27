@@ -2,6 +2,7 @@
 
 namespace AmsterdamPHP\JobBundle\Form;
 
+use AmsterdamPHP\JobBundle\Form\ChoiceList\ContractType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -19,7 +20,7 @@ class JobType extends AbstractType
             ->add('description')
             ->add('contractType', 'choice', array(
                 'label' => 'Type of contract',
-                'choices' => array('Full-time', 'Part-time', 'Freelance')
+                'choice_list' => new ContractType()
             ))
             ->add('location')
             ->add('salary', 'text', array(
