@@ -1,0 +1,13 @@
+job_report:
+    pattern: /{id}/report
+    defaults: { _controller: "AmsterdamPHPJobBundle:Report:report" }
+    requirements:
+        _method: get
+        id: \d+
+
+job_handle_report:
+    pattern: /{id}/report
+    defaults: { _controller: "AmsterdamPHPJobBundle:Report:handleReport" }
+    requirements:
+        _method: post|put
+        id: \d+

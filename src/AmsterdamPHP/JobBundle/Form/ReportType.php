@@ -2,20 +2,21 @@
 
 namespace AmsterdamPHP\JobBundle\Form;
 
+use AmsterdamPHP\JobBundle\Form\ChoiceList\ReportViolation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 
 class ReportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reason', 'textarea', array(
+            ->add('reason', 'choice', array(
                 'label' => 'Reason',
-                'constraints' => new Length(array(
-                    'min' => 50,
-                ))
+                'choice_list' => new ReportViolation()
+            ))
+            ->add('description', 'textarea', array(
+                'label' => 'Notes',
             ))
             ->add('name', 'text', array(
                 'label' => 'Name (optional)',

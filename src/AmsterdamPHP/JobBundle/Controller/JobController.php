@@ -298,52 +298,6 @@ class JobController extends Controller
         ;
     }
 
-    public function reportAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
-
-        $form = $this->createForm(new ReportType());
-
-        return $this->render('AmsterdamPHPJobBundle:Job:report.html.twig', array(
-            'form'   => $form->createView(),
-            'entity' => $entity,
-        ));
-    }
-
-    public function handleReportAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
-
-        $form = $this->createForm(new ReportType());
-        $form->bind($request);
-
-        if ( ! $form->isValid()) {
-            return $this->render('AmsterdamPHPJobBundle:Job:report.html.twig', array(
-                'form'   => $form->createView(),
-                'entity' => $entity,
-            ));
-        }
-
-        $data =$form->getData();
-        $reason = $data['reason'];
-        $name = $data['name'];
-        $email = $data['email'];
-
-        $abuseReportEvent = new AbuseReportEvent();
-        $abuseReportEvent->setJob($entity);
-        $abuseReportEvent->setName($name);
-        $abuseReportEvent->setEmail($email);
-        $abuseReportEvent->setReason($reason);
-
-        /** @var $dispatcher EventDispatcher */
-        $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch('send_abuse_report', $abuseReportEvent);
-
-        return $this->redirect($this->generateUrl('job_show', array('id' => $id)));
-    }
-
     public function handleRatingAction(Request $request, $id)
     {
         /** @var $em EntityManager */

@@ -4,6 +4,10 @@ Just now, somebody reported a case of abuse about "{{ job.title }}".
 The given reason was:
 {{ reason }}
 
+{% if description %}
+Description:
+{{ description }}
+{% endif %}
 {% if name %}
 Name: {{ name }}
 {% endif %}
