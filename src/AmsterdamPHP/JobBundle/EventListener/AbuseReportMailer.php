@@ -31,12 +31,13 @@ class AbuseReportMailer
             ->setTo('pascal.de.vink@gmail.com')
             ->setBody(
                 $this->templating->render(
-                    'AmsterdamPHPJobBundle:Job:report.txt.twig',
+                    'AmsterdamPHPJobBundle:Report:report.txt.twig',
                     array(
-                        'job'       => $event->getJob(),
-                        'reason'    => $event->getReason(),
-                        'name'      => $event->getName(),
-                        'email'     => $event->getEmail(),
+                        'job'         => $event->getJob(),
+                        'reason'      => $event->getReason(),
+                        'description' => $event->getDescription(),
+                        'name'        => $event->getName(),
+                        'email'       => $event->getEmail(),
                     )
                 )
             )
