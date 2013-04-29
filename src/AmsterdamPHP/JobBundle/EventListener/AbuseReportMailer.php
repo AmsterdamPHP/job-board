@@ -36,7 +36,7 @@ class AbuseReportMailer
                         'job'         => $event->getJob(),
                         'reason'      => $event->getReason(),
                         'description' => $event->getDescription(),
-                        'name'        => $event->getName(),
+                        'name'        => $event->getReporterName(),
                         'email'       => $event->getEmail(),
                     )
                 )

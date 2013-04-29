@@ -21,7 +21,7 @@ class AbuseReportEvent extends Event
     /**
      * @var string
      */
-    private $name;
+    private $reporterName;
 
     /**
      * @var string
@@ -82,22 +82,6 @@ class AbuseReportEvent extends Event
     }
 
     /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @param string $reason
      */
     public function setReason($reason)
@@ -111,5 +95,21 @@ class AbuseReportEvent extends Event
     public function getReason()
     {
         return $this->reason;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReporterName()
+    {
+        return $this->reporterName;
+    }
+
+    /**
+     * @param string $reporterName
+     */
+    public function setReporterName($reporterName)
+    {
+        $this->reporterName = $reporterName;
     }
 }

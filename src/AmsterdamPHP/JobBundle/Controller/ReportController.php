@@ -54,7 +54,7 @@ class ReportController extends Controller
 
         $reportChoices = new ReportViolation();
 
-        $data =$form->getData();
+        $data = $form->getData();
         $reason = $reportChoices->getLabelForOption($data['reason']);
         $description = $data['description'];
         $name = $data['name'];
@@ -62,7 +62,7 @@ class ReportController extends Controller
 
         $abuseReportEvent = new AbuseReportEvent();
         $abuseReportEvent->setJob($entity);
-        $abuseReportEvent->setName($name);
+        $abuseReportEvent->setReporterName($name);
         $abuseReportEvent->setEmail($email);
         $abuseReportEvent->setReason($reason);
         $abuseReportEvent->setDescription($description);
