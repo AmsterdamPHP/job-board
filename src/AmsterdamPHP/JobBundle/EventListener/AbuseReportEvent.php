@@ -16,6 +16,11 @@ class AbuseReportEvent extends Event
     /**
      * @var string
      */
+    private $description;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -34,6 +39,22 @@ class AbuseReportEvent extends Event
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
