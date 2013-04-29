@@ -95,6 +95,10 @@ footer {
     border-top: 1px dotted #c0c0c0;
 }
 
+div.delete_job {
+    display: inline;
+}
+
 /* Responsive parts */
 @media (max-width: 979px) {
     body {

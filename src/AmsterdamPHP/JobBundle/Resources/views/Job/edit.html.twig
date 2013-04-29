@@ -1,28 +1,29 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Job edit</h1>
 
-    <form action="{{ path('job_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Edit</button>
-        </p>
-    </form>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('job') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('job_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+<div class="row-fluid">
+    <section class="span8">
+        <h2>Job edit</h2>
+        <form action="{{ path('job_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="new-job">
+            <input type="hidden" name="_method" value="PUT" />
+            {{ form_widget(edit_form) }}
+            <p>
+                <button type="submit">Edit</button>
+            </p>
         </form>
-    </li>
-</ul>
+    </section>
+
+    {% include('AmsterdamPHPJobBundle:Job:guidelines.html.twig') %}
+</div>
+
+<div class="row-fluid">
+    <a class="btn btn-inverse" href="{{ path('job') }}">Cancel</a>
+
+    <form action="{{ path('job_delete', { 'id': entity.id }) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form, { 'attr': {'class': 'delete_job'} }) }}
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+</div>
 {% endblock %}

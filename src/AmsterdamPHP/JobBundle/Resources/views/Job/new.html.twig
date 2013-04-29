@@ -13,17 +13,7 @@
         </form>
     </section >
 
-    <section class="span4">
-        <h2>Posting Guidelines</h2>
-
-        <p>AmsterdamPHP is a PHP User Group, please only post job opportunities that <strong>include PHP as a required skill</strong>. </p>
-
-        <p>AmsterdamPHP is also <strong>Amsterdam based</strong>, our members either work in Amsterdam or live in Amsterdam, keep that in mind.</p>
-
-        <p>Amsterdam is a big Expat center, thus our members may not speak dutch, for best results <strong>post job ads in english</strong> and make it clear where dutch is a requirement.</p>
-
-        <p>To achieve best results be very clear about the job you are posting, state all requirements, highlight benefits and details about the job to be executed. Using names such as &#8220;ninja&#8221;, &#8220;wizard&#8221;, &#8220;guru&#8221; have very little meaning and can actually have the reverse effect on developers, we are all professionals. Use the free text space to include any content not explicitly set into another field, make good use of the space.</p>
-    </section>
+    {% include('AmsterdamPHPJobBundle:Job:guidelines.html.twig') %}
 </div>
 
 {% endblock %}

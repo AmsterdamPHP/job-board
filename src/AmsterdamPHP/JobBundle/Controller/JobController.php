@@ -195,7 +195,6 @@ class JobController extends Controller
 
         $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
 
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job.');
         }
