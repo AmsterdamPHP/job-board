@@ -16,3 +16,4 @@ parameters:
     https_port: 443
     google_analytics_ua_code:
     google_analytics_url:
+    abuse_report_email_address:

@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->append(new ScalarNodeDefinition('google_analytics_ua_code'));
         $rootNode->append(new ScalarNodeDefinition('google_analytics_url'));
+        $rootNode->append(new ScalarNodeDefinition('abuse_report_email_address'));
 
         return $treeBuilder;
     }

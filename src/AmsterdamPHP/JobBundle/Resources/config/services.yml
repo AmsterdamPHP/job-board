@@ -9,6 +9,6 @@ services:
 
     sen_abuse_report_listener:
         class: AmsterdamPHP\JobBundle\EventListener\AbuseReportMailer
-        arguments: [@templating, @mailer]
+        arguments: [@templating, @mailer, "%abuse_report_email_address%"]
         tags:
             - { name: kernel.event_listener, event:send_abuse_report, method:onEvent }

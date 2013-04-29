@@ -17,18 +17,24 @@ class AbuseReportMailer
      */
     private $mailer;
 
-    public function __construct(EngineInterface $templating, Swift_Mailer $mailer)
+    /**
+     * @var string
+     */
+    private $abuseReportEmailAddress;
+
+    public function __construct(EngineInterface $templating, Swift_Mailer $mailer, $abuseReportEmailAddress)
     {
         $this->templating = $templating;
         $this->mailer = $mailer;
+        $this->abuseReportEmailAddress = $abuseReportEmailAddress;
     }
 
     public function onEvent(AbuseReportEvent $event)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject('Job abuse report')
-            ->setFrom('abuse@amsterdamphp.nl')
-            ->setTo('pascal.de.vink@gmail.com')
+            ->setFrom('abuse@amsterdamphp.nl', 'AmsterdamPHP Job Board')
+            ->setTo($this->abuseReportEmailAddress)
             ->setBody(
                 $this->templating->render(
                     'AmsterdamPHPJobBundle:Report:report.txt.twig',

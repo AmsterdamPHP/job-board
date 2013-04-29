@@ -92,3 +92,4 @@ stof_doctrine_extensions:
 amsterdam_php_job:
     google_analytics_ua_code: %google_analytics_ua_code%
     google_analytics_url: %google_analytics_url%
+    abuse_report_email_address: %abuse_report_email_address%

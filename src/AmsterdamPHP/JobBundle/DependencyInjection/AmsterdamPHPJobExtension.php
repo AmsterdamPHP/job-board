@@ -24,5 +24,13 @@ class AmsterdamPHPJobExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        if (!isset($config['abuse_report_email_address'])) {
+            throw new \InvalidArgumentException(
+                'The "abuse_report_email_address" option must be set'
+            );
+        }
+
+        $container->setParameter('abuse_report_email_address', $config['abuse_report_email_address']);
     }
 }
