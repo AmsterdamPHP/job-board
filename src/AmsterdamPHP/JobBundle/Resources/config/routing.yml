@@ -3,3 +3,7 @@ AmsterdamPHPJobBundle_job:
     resource: "@AmsterdamPHPJobBundle/Resources/config/routing/job.yml"
     prefix:   /job
 
+AmsterdamPHPJobBundle_report:
+    resource: "@AmsterdamPHPJobBundle/Resources/config/routing/report.yml"
+    prefix:   /job/report
+

@@ -57,20 +57,6 @@ job_delete:
         _method: post|delete
         id: \d+
 
-job_report:
-    pattern: /{id}/report
-    defaults: { _controller: "AmsterdamPHPJobBundle:Job:report" }
-    requirements:
-        _method: get
-        id: \d+
-
-job_handle_report:
-    pattern: /{id}/report
-    defaults: { _controller: "AmsterdamPHPJobBundle:Job:handleReport" }
-    requirements:
-        _method: post|put
-        id: \d+
-
 job_handle_rating:
     pattern: /{id}/rate
     defaults: { _controller: "AmsterdamPHPJobBundle:Job:handleRating" }
