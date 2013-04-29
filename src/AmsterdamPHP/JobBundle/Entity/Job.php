@@ -2,6 +2,7 @@
 
 namespace AmsterdamPHP\JobBundle\Entity;
 
+use AmsterdamPHP\JobBundle\Form\ChoiceList\ContractType;
 use Doctrine\ORM\Mapping as ORM;
 use AmsterdamPHP\UserBundle\Entity\User;
 
@@ -281,6 +282,17 @@ class Job
     public function getContractType()
     {
         return $this->contractType;
+    }
+
+    /**
+     * Get Human Readable Contract Type
+     * 
+     * @return null|string
+     */
+    public function getContractTypeLabel()
+    {
+        $choiceList = new ContractType();
+        return $choiceList->getLabelForOption($this->contractType);
     }
 
     /**
