@@ -65,6 +65,7 @@ class ReportController extends Controller
         $abuseReportEvent->setName($name);
         $abuseReportEvent->setEmail($email);
         $abuseReportEvent->setReason($reason);
+        $abuseReportEvent->setDescription($description);
 
         /** @var $dispatcher EventDispatcher */
         $dispatcher = $this->get('event_dispatcher');
