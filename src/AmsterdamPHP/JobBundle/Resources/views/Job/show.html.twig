@@ -34,6 +34,22 @@
 
         <div class="details">{{ entity.description | nl2br}}</div>
 
+        <h3>Extra Information</h3>
+        <dl class="dl-horizontal">
+            <dt>Contract Type</dt>
+            <dd>{{ entity.getContractTypeLabel() }}</dd>
+
+            {% if entity.salary is not empty %}
+                <dt>Salary</dt>
+                <dd>{{ entity.salary }}</dd>
+            {% endif %}
+
+            {% if entity.url is not empty %}
+                <dt>Url</dt>
+                <dd>{{ entity.url }}</dd>
+            {% endif %}
+        </dl>
+
         <div class="pull-right">
             <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
                 <i class="icon-comment icon-large"></i> Contact poster
