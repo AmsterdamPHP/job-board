@@ -25,7 +25,7 @@ class JobRating
     /**
      * @var Job
      *
-     * @ORM\ManyToOne(targetEntity="AmsterdamPHP\JobBundle\Entity\Job")
+     * @ORM\ManyToOne(targetEntity="AmsterdamPHP\JobBundle\Entity\Job", inversedBy="ratings")
      */
     private $job;
 
