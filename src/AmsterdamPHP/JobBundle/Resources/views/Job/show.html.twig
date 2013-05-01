@@ -18,19 +18,21 @@
 {% block body -%}
 <div class="row-fluid">
     <section id="details" class="span8 pull-left" xmlns="http://www.w3.org/1999/html">
-        <div class="pull-right">
+        <div class="pull-right contactGroup">
             <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
                 <i class="icon-comment icon-large"></i> Contact poster
             </a>
         </div>
 
         <h2>{{ entity.title }}</h2>
-        <h4>
-            {{ entity.location }} <small>{{ entity.created|date('d-m-Y') }}</small>
+
+        <div id="info">
+            <strong>{{ entity.location }}</strong>
+            <span>{{ entity.created|date('d-m-Y') }}</span>
             <input type="range" min="0" max="5" value="{{ entity.calculatedRating }}" step="1" id="jobRating">
             <div id="jobRatingWrapper" class="rateit" data-rateit-backingfld="#jobRating"
                  data-rateit-resetable="false" data-jobid="{{ entity.id }}" data-rateit-readonly="{{ ratedJob }}" ></div>
-        </h4>
+        </div>
 
         <div class="details">{{ entity.description | nl2br}}</div>
 
@@ -50,7 +52,7 @@
             {% endif %}
         </dl>
 
-        <div class="pull-right">
+        <div class="pull-right contactGroup">
             <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
                 <i class="icon-comment icon-large"></i> Contact poster
             </a>
