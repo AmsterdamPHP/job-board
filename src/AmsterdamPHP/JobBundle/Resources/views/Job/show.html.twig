@@ -19,6 +19,7 @@
 <div class="row-fluid">
     <section id="details" class="span8 pull-left" xmlns="http://www.w3.org/1999/html">
         <div class="pull-right">
+            {% include 'AmsterdamPHPJobBundle:Job:_linkedin-button.html.twig' with {job: entity} %}
             <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
                 <i class="icon-comment icon-large"></i> Contact poster
             </a>
@@ -51,9 +52,12 @@
         </dl>
 
         <div class="pull-right">
-            <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
-                <i class="icon-comment icon-large"></i> Contact poster
-            </a>
+            {% include 'AmsterdamPHPJobBundle:Job:_linkedin-button.html.twig' with {job: entity} %}
+            <p class="text-right">
+                <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
+                    <i class="icon-comment icon-large"></i> Contact poster
+                </a>
+            </p>
             <p class="text-right">
                 <small><a href="{{ path('job_handle_report', { 'id': entity.id }) }}"><i class="icon-warning-sign"></i> Report abuse</a></small>
             </p>
