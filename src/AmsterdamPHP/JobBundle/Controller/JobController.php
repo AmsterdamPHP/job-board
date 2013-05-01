@@ -266,7 +266,10 @@ class JobController extends Controller
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+
+        /** @var Job $entity */
         $entity = $em->getRepository('AmsterdamPHPJobBundle:Job')->find($id);
 
         if (!$entity) {
@@ -279,6 +282,11 @@ class JobController extends Controller
         )
         {
             throw new AccessDeniedException();
+        }
+
+        foreach($entity->getRatings() as $rating)
+        {
+            $em->remove($rating);
         }
 
         $em->remove($entity);
