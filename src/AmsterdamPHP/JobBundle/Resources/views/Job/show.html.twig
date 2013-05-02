@@ -18,11 +18,17 @@
 {% block body -%}
 <div class="row-fluid">
     <section id="details" class="span8 pull-left" xmlns="http://www.w3.org/1999/html">
-        <div class="pull-right">
-            <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
-                <i class="icon-comment icon-large"></i> Contact poster
-            </a>
-        </div>
+
+        {% if is_granted('OWNER', entity) or is_granted('ROLE_ADMIN') %}
+            <div class="owner actions pull-right">
+                <form id="formDelete" method="post" action="{{ path('job_delete', {'id':entity.id}) }}" class="">
+                    <div class="btn-group">
+                        <a class="btn btn-small" href="{{ path('job_edit', {'id':entity.id}) }}"> <i class="icon-edit icon-large"></i> Edit</a>
+                        <a href="javascript:void(0)" onclick="$('#formDelete').submit()" class="btn btn-small btn-danger"><i class="icon-trash icon-large"></i> Delete</a>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
 
         <h2>{{ entity.title }}</h2>
         <h4>
@@ -61,34 +67,43 @@
     </section>
 
     <section id="poster" class="span4 pull-right">
-        {% if is_granted('OWNER', entity) or is_granted('ROLE_ADMIN') %}
-            <div class="owner actions">
-                <a class="btn " href="{{ path('job_edit', {'id':entity.id}) }}"> <i class="icon-edit icon-large"></i> Edit</a>
-                <form method="post" action="{{ path('job_delete', {'id':entity.id}) }}" class="">
-                    <button type="submit" class="btn btn-danger"><i class="icon-trash icon-large"></i> Delete</button>
-                </form>
+
+        <div class="userActions">
+
+            <a class="btn btn-inverse btn-block" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
+                <i class="icon-envelope"></i> Apply by Email
+            </a>
+
+            <a class="btn  btn-info btn-block" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
+                <i class="icon-user"></i> Apply with LinkedIn
+            </a>
+            
+        </div>
+
+        <hr>
+
+            <div class="media">
+
+                <div class="pull-left span3">
+                {% if entity.user.companyLogo %}
+                    <a href="{{ entity.user.companyUrl }}">
+                        <img class="media-object img-rounded" src="{{ entity.user.companyLogo }}" />
+                    </a>
+                {% else %}
+                    <img class="media-object img-rounded" src="{{ gravatar(entity.user.email) }}" />
+                {% endif %}
+                </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ entity.user.companyName }}</h4>
+                        <p>Contact: {{ entity.user.name }}</p>
+                    </div>
+                <p class="clearfix"></p>
             </div>
-        {% endif %}
 
-        <h2>Poster Info</h2>
-        <div class="vcard">
-            {% if entity.user.companyLogo %}
-                <a href="{{ entity.user.companyUrl }}">
-                    <img class="photo" src="{{ entity.user.companyLogo }}" />
-                </a>
-            {% else %}
-                <img class="photo" src="{{ gravatar(entity.user.email) }}" />
-            {% endif %}
+            <blockquote>
+                {{ entity.user.companyBio }}
+            </blockquote>
 
-            <ul>
-                <li class="company">Company name: <strong>{{ entity.user.companyName }}</strong></li>
-                <li class="name">Contact name: {{ entity.user.name }}</li>
-            </ul>
-        </div>
-
-        <div>
-            {{ entity.user.companyBio }}
-        </div>
     </section>
 </div>
 {% endblock %}

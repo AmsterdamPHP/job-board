@@ -1,0 +1,15 @@
+
+On a regular development Ubuntu Apache2-PHP5-MySQL server
+
+* edit app/config/parameters.yml.default and save as parameters.yml
+# curl -sS https://getcomposer.org/installer | php
+# php composer.phar install
+# sudo apt-get install php-apc
+# php app/console doctrine:schema:create
+# sudo apache2ctl restart
+# chmod 777 app/logs/
+# chmod 777 app/cache/
+
+* edit app/config/config.yml and add cache : false to the twig configuration
+
+For optimal result, create a VirtualHost pointing to job-board/web
