@@ -57,9 +57,6 @@
         </dl>
 
         <div class="pull-right">
-            <a class="btn  btn-primary contact-recruiter" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
-                <i class="icon-comment icon-large"></i> Contact poster
-            </a>
             <p class="text-right">
                 <small><a href="{{ path('job_handle_report', { 'id': entity.id }) }}"><i class="icon-warning-sign"></i> Report abuse</a></small>
             </p>
@@ -75,37 +72,44 @@
             </a>
 
             <a class="btn  btn-info btn-block" href="mailto:{{ entity.user.email }}?subject={{entity.title}}">
-                <i class="icon-user"></i> Apply with LinkedIn
+                <i class="icon-linkedin-sign"></i> Apply with LinkedIn
             </a>
-            
+
+            <p>Share:
+                <a href="javascript:void(0)" onclick="shareFB()"><i class="icon-facebook-sign icon-large"></i></a>
+                <a href="javascript:void(0)" onclick="shareTwitter()"><i class="icon-twitter-sign icon-large"></i></a>
+                <a href="javascript:void(0)" onclick="shareGPlus()"><i class="icon-google-plus-sign icon-large"></i></a>
+                <a href="javascript:void(0)" onclick="shareLinkedIn()"><i class="icon-linkedin-sign icon-large"></i></a>
+            </p>
         </div>
 
         <hr>
 
-            <div class="media">
+        <div class="media">
 
-                <div class="pull-left span3">
-                {% if entity.user.companyLogo %}
-                    <a href="{{ entity.user.companyUrl }}">
-                        <img class="media-object img-rounded" src="{{ entity.user.companyLogo }}" />
-                    </a>
-                {% else %}
-                    <img class="media-object img-rounded" src="{{ gravatar(entity.user.email) }}" />
-                {% endif %}
-                </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{ entity.user.companyName }}</h4>
-                        <p>Contact: {{ entity.user.name }}</p>
-                    </div>
-                <p class="clearfix"></p>
+            <div class="pull-left span3">
+            {% if entity.user.companyLogo %}
+                <a href="{{ entity.user.companyUrl }}">
+                    <img class="media-object img-rounded" src="{{ entity.user.companyLogo }}" />
+                </a>
+            {% else %}
+                <img class="media-object img-rounded" src="{{ gravatar(entity.user.email) }}" />
+            {% endif %}
             </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ entity.user.companyName }}</h4>
+                    <p>Contact: {{ entity.user.name }}</p>
+                </div>
+            <p class="clearfix"></p>
+        </div>
 
-            <blockquote>
-                {{ entity.user.companyBio }}
-            </blockquote>
+        <blockquote>
+            {{ entity.user.companyBio }}
+        </blockquote>
 
     </section>
 </div>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -123,5 +127,29 @@
     <script type="text/javascript">
         var jobRating = new JobRating();
         jobRating.init();
+
+        function shareFB() {
+            var sharer = "https://www.facebook.com/sharer/sharer.php?u=";
+            window.open(sharer + location.href, 'sharer', 'width=626,height=436');
+        }
+
+        function shareTwitter() {
+            var sharer = 'https://twitter.com/share';
+            var params = '?url=' + location.href + '&via=amsterdamphp&text=' + '{{ entity.title }}' + '&hashtags=php,jobs';
+            window.open(sharer + params, 'sharer', 'width=550,height=450');
+        }
+
+        function shareGPlus() {
+            var sharer = 'https://plus.google.com/share';
+            var params = '?url=' + location.href;
+            window.open(sharer + params, 'sharer', 'width=550,height=450');
+        }
+
+        function shareLinkedIn() {
+            var sharer = 'http://www.linkedin.com/shareArticle';
+            var params = '?mini=true&url=' + location.href + '&title=' + '{{ entity.title }}' + '&source=AmsterdamPHP' ;
+            window.open(sharer + params, 'sharer', 'width=520,height=570');
+        }
     </script>
+
 {% endblock %}
