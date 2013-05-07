@@ -17,7 +17,24 @@ class JobType extends AbstractType
                 'label' => 'Language',
                 'choices' => array('en' => 'English', 'nl' => 'Dutch')
             ))
-            ->add('description')
+            ->add('description', 'ckeditor', array(
+                'config' => array(
+                    'toolbar' => array(
+                        array(
+                            'name' => 'basicstyles',
+                            'items' => array('Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat')
+                        ),
+                        array(
+                            'name' => 'paragraph',
+                            'items' => array('NumberedList', 'BulletedList', '-','Outdent','Indent')
+                        ),
+                        array(
+                            'name' => 'links',
+                            'items' => array('Link', 'Unlink')
+                        )
+                    ),
+                )
+            ))
             ->add('contractType', 'choice', array(
                 'label' => 'Type of contract',
                 'choice_list' => new ContractType()

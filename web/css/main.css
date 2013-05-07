@@ -95,11 +95,12 @@ form.login input[type="password"] {
 
 .vcard .photo {
     float: left;
+    margin: 0 10px 10px 0;
 }
 
 .vcard ul {
     float: left;
-    margin-left: 10px;
+    margin-left: 0;
     display: block;
     list-style: none;
 }
@@ -148,6 +149,14 @@ footer {
     border-top: 1px dotted #c0c0c0;
 }
 
+div.delete_job {
+    display: inline;
+}
+
+#jobRatingWrapper {
+    vertical-align: middle;
+}
+
 /* Responsive parts */
 @media (max-width: 979px) {
     body {
@@ -173,5 +182,13 @@ footer {
 
     section.content {
         margin-top: 50px;
+    }
+
+    .contactGroup {
+        float: none;
+    }
+
+    .contactGroup p {
+        text-align: left;
     }
 }

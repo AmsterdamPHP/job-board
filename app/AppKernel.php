@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             new AmsterdamPHP\JobBundle\AmsterdamPHPJobBundle(),
             new AmsterdamPHP\UserBundle\AmsterdamPHPUserBundle(),

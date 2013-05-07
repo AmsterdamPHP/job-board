@@ -34,7 +34,7 @@
                  data-rateit-resetable="false" data-jobid="{{ entity.id }}" data-rateit-readonly="{{ ratedJob }}" ></div>
         </div>
 
-        <div class="details">{{ entity.description | nl2br}}</div>
+        <div class="details">{{ entity.description|raw }}</div>
 
         <h3>Extra Information</h3>
         <dl class="dl-horizontal">

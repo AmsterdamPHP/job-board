@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cafb2963c49cbcca9aa43ce655eda66d",
+    "hash": "66e45d94acdc689b600ace9f53da1f5a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -703,6 +703,55 @@
                 "orm"
             ],
             "time": "2013-03-24 20:43:58"
+        },
+        {
+            "name": "egeloen/ckeditor-bundle",
+            "version": "dev-master",
+            "target-dir": "Ivory/CKEditorBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
+                "reference": "15812a63b8244011f9b617f38bd9bb5f1a87991d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/15812a63b8244011f9b617f38bd9bb5f1a87991d",
+                "reference": "15812a63b8244011f9b617f38bd9bb5f1a87991d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/form": ">=2.1",
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "twig/twig": "1.*"
+            },
+            "suggest": {
+                "twig/twig": "Allows to use Ivory CKEditor twig templates"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ivory\\CKEditorBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                }
+            ],
+            "description": "Provides a CKEditor integration for your Symfony2 Project.",
+            "keywords": [
+                "CKEditor"
+            ],
+            "time": "2013-05-06 09:05:04"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2521,7 +2570,8 @@
     "stability-flags": {
         "doctrine/doctrine-migrations-bundle": 20,
         "ornicar/gravatar-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20
+        "stof/doctrine-extensions-bundle": 20,
+        "egeloen/ckeditor-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"
