@@ -23,3 +23,22 @@ set :use_composer, true
 
 default_run_options[:pty] = true
 set :use_sudo, false
+
+# Deploy from tags
+namespace :deploy do
+
+  desc "Deply to a tag"
+  task :tag do
+    transaction do
+      set :branch do
+        default_tag = `git tag`.split("\n").last
+
+        tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
+        tag = default_tag if tag.empty?
+        tag
+      end unless exists?(:branch)
+
+      find_and_execute_task("deploy")
+    end
+  end
+end
