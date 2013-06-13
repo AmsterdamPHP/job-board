@@ -54,7 +54,7 @@ security:
             security: false
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/job/new, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/job/create, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/job/.*/edit$, roles: IS_AUTHENTICATED_FULLY}
