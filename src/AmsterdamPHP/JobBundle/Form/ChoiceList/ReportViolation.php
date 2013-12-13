@@ -21,6 +21,8 @@ class ReportViolation extends SimpleChoiceList
             'no_php'  => 'PHP is not a required skill',
             'unrelated' => 'Not related to PHP',
             'duplicate' => 'Duplicated',
+            'invalid_url' => 'URL is invalid',
+            'expired' => 'Job is expired',
             'not_enough_date' => 'Not enough information',
         );
 
