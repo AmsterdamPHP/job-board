@@ -50,8 +50,6 @@ class JobRepository extends EntityRepository
         $query = $queryBuilder
             ->where('job.blocked = 0')
             ->andWhere('job.archived = 0')
-            ->andWhere('job.expires >= :now')
-            ->setParameter('now', new DateTime())
             ->setMaxResults($itemCount)
             ->setFirstResult($offset)
             ->getQuery();
