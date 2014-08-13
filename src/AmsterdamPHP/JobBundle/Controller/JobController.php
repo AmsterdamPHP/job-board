@@ -65,7 +65,7 @@ class JobController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var $repository JobRepository */
         $repository = $em->getRepository('AmsterdamPHPJobBundle:Job');
-        $jobs = $repository->getJobsList($itemCount = 100, $offset);
+        $jobs = $repository->getJobsList(100, $offset);
 
         return $this->render('AmsterdamPHPJobBundle:Job:index.html.twig', array(
             'entities' => $jobs,
